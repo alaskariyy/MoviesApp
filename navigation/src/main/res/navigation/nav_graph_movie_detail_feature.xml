@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_movie_detail_feature"
+    app:startDestination="@id/movieDetailFragment">
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.mahdan.features.moviedetail.fragment.MovieDetailFragment"
+        android:label="Movie Detail">
+        <argument android:name="id" app:argType="string"/>
+
+    </fragment>
+
+</navigation>

@@ -1,0 +1,16 @@
+apply plugin: 'com.android.library'
+apply from: '../android_commons.gradle'
+
+dependencies {
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation project(Modules.navigation)
+
+    api project(Modules.repository)
+    api project(Modules.navigation)
+    // KOIN (Because each feature has to handle its dependencies)
+    api Libraries.koin
+    api Libraries.koinCore
+    api Libraries.koinViewModel
+}

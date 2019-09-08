@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    // MODULES
+    implementation project(Modules.remote)
+    implementation project(Modules.local)
+
+    /** Used API instead of Implementation, because want the module that depend on repository
+     * module [ex. features module] got these module too
+     */
+    api project(Modules.model)
+    // ANDROID
+    implementation KotlinLibraries.kotlinCoroutineCore
+    implementation AndroidLibraries.kotlinCoroutineAndroid
+    implementation AndroidLibraries.lifecycleExtensions
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinCore
+    implementation Libraries.koinViewModel
+    // RETROFIT
+    implementation Libraries.retrofit
+    // TEST MODULE
+    testImplementation project(Modules.commonTest)
+    // TEST
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.mockk
+    testImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.coroutine
+    testImplementation project(Modules.commonTest)
+}

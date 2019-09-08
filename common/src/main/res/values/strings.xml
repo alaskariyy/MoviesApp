@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Movies App</string>
+    <string name="error_happened">Something wrong happen ¯\_(ツ)_/¯</string>
+
+    <string name="transition_poster_orig" translatable="false">transition_poster_orig</string>
+    <string name="transition_poster_dest" translatable="false">transition_poster_dest</string>
+</resources>

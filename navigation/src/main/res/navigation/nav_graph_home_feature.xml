@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/nav_graph_home_feature"
+	app:startDestination="@id/homeFragment">
+
+	<fragment android:id="@+id/homeFragment"
+		android:name="id.mahdan.home.fragment.HomeFragment"
+		android:label="Movies App">
+
+		<action
+			android:id="@+id/action_homeFragment_to_movieDetailFragment"
+			app:destination="@id/nav_graph_movie_detail_feature">
+			<argument android:name="id" app:argType="string"/>
+		</action>
+
+		<action
+			android:id="@+id/action_homeFragment_to_imageDetailFragment"
+			app:destination="@id/imageDetailFragment"
+			app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+			app:popExitAnim="@anim/nav_default_pop_exit_anim">
+			<argument android:name="url" app:argType="string"/>
+		</action>
+
+	</fragment>
+
+	<fragment
+		android:id="@+id/imageDetailFragment"
+		android:name="id.mahdan.home.fragment.ImageDetailFragment"
+		android:label="Movie's Poster">
+		<argument android:name="url" app:argType="string"/>
+
+	</fragment>
+
+	<include app:graph="@navigation/nav_graph_movie_detail_feature" />
+
+</navigation>

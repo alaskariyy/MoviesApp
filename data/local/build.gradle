@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-kapt'
+apply from: '../../android_commons.gradle'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+}
+
+dependencies {
+    implementation Libraries.multidex
+    // ROOM
+    implementation Libraries.roomRunTime
+    implementation Libraries.roomKtx
+    implementation AndroidLibraries.lifecycleExtensions
+    kapt Libraries.roomCompiler
+    // DATA MODULE
+    implementation project(Modules.model)
+    // TEST MODULE
+    androidTestImplementation project(Modules.commonTest)
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    // TEST
+    androidTestImplementation TestLibraries.coroutine
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.koin
+    androidTestImplementation TestLibraries.archCoreTest
+}
