@@ -49,14 +49,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Loading bray"
+                    android:text="Loading.."
                     android:visibility="@{viewmodel.showLoading ? view.VISIBLE : view.GONE}"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Kosong bray"
+                    android:text="Database is empty, type search to add"
                     android:visibility="@{viewmodel.showEmpty ? view.VISIBLE : view.GONE}"/>
 
                 <androidx.recyclerview.widget.RecyclerView
