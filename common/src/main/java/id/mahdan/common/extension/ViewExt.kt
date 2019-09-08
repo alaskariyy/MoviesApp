@@ -25,9 +25,12 @@ fun Fragment.setupSnackbar(lifecycleOwner: LifecycleOwner, snackbarEvent: LiveDa
 fun RecyclerView.onScrollToEnd(itemPosition: Int, onScrollNearEnd: (Unit) -> Unit)
         = addOnScrollListener(object : RecyclerView.OnScrollListener() {
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        val linearLayoutManager = this@onScrollToEnd.layoutManager as LinearLayoutManager
-        if (linearLayoutManager.childCount + linearLayoutManager.findFirstVisibleItemPosition()
-            >= linearLayoutManager.itemCount - itemPosition) {
+        super.onScrolled(recyclerView, dx, dy)
+        val mLayoutManager = this@onScrollToEnd.layoutManager as LinearLayoutManager
+        val visibleItemCount = mLayoutManager.childCount
+        val totalItemCount = mLayoutManager.itemCount
+        val firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition()
+        if (visibleItemCount + firstVisibleItemPosition > totalItemCount - itemPosition) {
             onScrollNearEnd(Unit)
         }
     }

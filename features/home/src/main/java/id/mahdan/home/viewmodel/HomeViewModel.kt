@@ -46,7 +46,11 @@ class HomeViewModel(private val searchMoviesUseCase: SearchMoviesUseCase,
             = searchMovies(titleSearch.value?: "", false)
 
     fun onScrolledToBottom(){
-        searchMovies(titleSearch.value?: "", true, currentPage+1)
+        if (currentPage <= movies.value?.data?.size?: 0 / 10) {
+            currentPage++
+            searchMovies(titleSearch.value?: "", true, currentPage)
+        }
+
     }
 
     fun searchMovies(title: String, isPagination: Boolean, page: Int = 1) = viewModelScope.launch(dispatchers.main) {
@@ -55,15 +59,17 @@ class HomeViewModel(private val searchMoviesUseCase: SearchMoviesUseCase,
         if (!moviesSource.hasActiveObservers()) {
             _movies.addSource(moviesSource) { newData ->
                 if (!isPagination){
+                    currentPage = 1
                     _showEmpty.postValue(newData.data?.isEmpty() != false)
                     _showLoading.postValue(newData.status == Resource.Status.LOADING)
                     _movies.value = newData
                 } else {
                     newData.data?.let {
                         val oldData = movies.value?.data
-                        oldData?.addAll(it)
-                        _movies.postValue(Resource.success(oldData))
-                        currentPage++
+                        if (it != oldData) {
+                            oldData?.addAll(it)
+                            _movies.value = Resource.success(oldData)
+                        }
                     }
                 }
                 if (newData.status == Resource.Status.ERROR) _snackbarError.value = Event(R.string.error_happened)
